@@ -1,0 +1,19 @@
+@using System.Collections.Generic;
+@using GymMvc.Models;
+@{
+    ViewData["Title"] = "Clients Search Results";
+}
+@model List<Client>
+
+<h2>Results: @Model.Count.ToString() pts</h2>
+
+<table class="table">
+@foreach (Client c in Model)
+{
+<tr>
+    <td>@c.LastName, @c.FirstName (@c.DateOfBirth.ToShortDateString())</td>
+    <td><a class="btn btn-outline-dark" asp-action="ClientInfo" asp-route-id="@c.ID">Info</a></td>
+</tr>
+}
+</table>
+<a asp-action="Search" class="btn btn-outline-dark">Back to search</a>

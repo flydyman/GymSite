@@ -1,0 +1,36 @@
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Client info";
+}
+@model GymMvc.Models.Views.ClientInfo;
+
+<h2>Client information</h2>
+
+<table class="table">
+<tr>
+    <td>Client</td>
+    <td>@Model.LastName, @Model.FirstName<br />
+    @Model.Gender<br />
+    @Model.DateOfBirth.ToShortDateString()
+    </td>
+</tr>
+@if (Model.HasAbonement){
+<tr>
+    <td>Abonement</td>
+    <td>Ordered at: @Model.StartDate.ToShortDateString()<br/>
+    Last day: @Model.EndDate.ToShortDateString()
+    </td>
+</tr>
+<tr>
+    <td>Training</td>
+    <td>@Model.Description<br />
+    Training costs @Model.Cost.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))
+    </td>
+</tr>
+} else {
+<tr>
+    <td>Client has no abonement!</td>
+    <td><a class="btn btn-outline-dark">Make new</a></td>
+</tr>
+}
+</table>

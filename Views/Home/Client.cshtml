@@ -1,0 +1,19 @@
+@using System;
+@{
+    ViewData["Title"] = "Client registration";
+    bool isEmpty = Convert.ToBoolean(ViewData["EmptyResult"]);
+}
+@model GymMvc.Models.Client
+
+@using (Html.BeginForm("Search", "Home", FormMethod.Post)){
+    @Html.Label("LastName", "Search by Last Name");
+    @Html.TextBox("LastName");
+    <br />
+    <input class="btn btn-outline-dark" type="submit" value="Search" />
+}
+@if (isEmpty){
+    <p><strong style="color: red;">No Results</strong></p>
+}
+<div>
+    <a asp-action="Registration" class="btn btn-outline-dark">Register new Client</a>
+</div>

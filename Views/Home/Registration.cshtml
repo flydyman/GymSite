@@ -1,0 +1,23 @@
+@using GymMvc.Models;
+@using System;
+@{
+    ViewData["Title"] = "New Client";
+}
+@model GymMvc.Models.Client
+<h2>Create new client record</h2>
+@using (Html.BeginForm("Registration", "Home", FormMethod.Post)){
+    @Html.HiddenFor(m => m.ID);
+    @Html.LabelFor(n => n.LastName, "Last name : ");
+    @Html.TextBoxFor(n => n.LastName);
+    <br />
+    @Html.LabelFor(n => n.FirstName, "First name : ")
+    @Html.TextBoxFor(n => n.FirstName);
+    <br />
+    @Html.LabelFor(n => n.Gender, "Gender : ");
+    @Html.DropDownListFor(n => n.Gender, Html.GetEnumSelectList(typeof(Client.Genders)));
+    <br />
+    @Html.LabelFor(n => n.DateOfBirth, "Date of birth");
+    @Html.TextBoxFor(n => n.DateOfBirth, DateTime.Now.ToShortDateString(), new {type = "date"})
+    <br />
+    <input class="btn btn-outline-dark" type="submit" value="Create" />
+}
