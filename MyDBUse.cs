@@ -14,28 +14,25 @@ namespace GymSite
     }
     public class MyDBUse
     {
-        string ConnectionString;
         DbConnection Connection;
         MyDBType dbtype;
-        public DataSet dataSet {get;set;}
 
-        public MyDBUse(MyDBType dBType, string conn, string name)
+        public MyDBUse(MyDBType dBType, string conn)
         {
             dbtype = dBType;
-            ConnectionString = conn;
             switch (dbtype)
             {
                 case(MyDBType.mysql):
-                    Connection = new MySqlConnection(ConnectionString);
+                    Connection = new MySqlConnection(conn);
                     break;
                 case(MyDBType.sqlite):
-                    Connection = new SQLiteConnection(ConnectionString);
+                    Connection = new SQLiteConnection(conn);
                     break;
             }
-            dataSet = new DataSet(name);
+            Connection.Open();
         }
 
-        private DbCommand GetCommand(string query)
+        public DbCommand GetCommand(string query)
         {
             switch (dbtype)
             {
@@ -57,52 +54,23 @@ namespace GymSite
             }
             return null;
         }
+        private DataAdapter GetDataAdapter(string query)
+        {
+            switch (dbtype)
+            {
+                case (MyDBType.mysql):
+                    return new MySqlDataAdapter(query, (MySqlConnection)Connection);
+                case (MyDBType.sqlite):
+                    return new SQLiteDataAdapter(query, (SQLiteConnection)Connection);
+            }
+            return null;
+        }
 
         public DbDataReader GetReader (string query)
         {
-            Connection.Open();
+            // For direct access
+            //Connection.Open();
             return GetCommand(query).ExecuteReader();
-        }
-
-        public int Update(DataSet dataSet)
-        {
-            int res = 0;
-            try
-            {
-                if (!dataSet.IsInitialized)
-                    throw new Exception("DATASET IS NOT INITIALIZED!");
-                Connection.Open();
-            }
-            finally 
-            {
-                Connection.Close();
-            }
-            return res;
-        }
-        public string GetSQL(string Expression, object O)
-        {
-            string res = Expression;
-            List<ObjField> fields= Commons.GetObjFields(O);
-            foreach (ObjField f in fields)
-            {
-                string s = " "+f.FieldName+" = '"+ f.FieldValue+"'";
-                res += s;
-            }
-            return res;
-        }
-        public string GetSQL(string Expression, List<object> Os)
-        {
-            string res = Expression;
-            foreach (object o in Os)
-            {
-                List<ObjField> fields = Commons.GetObjFields(o);
-                foreach (ObjField f in fields)
-                {
-                    string s = " "+f.FieldName+" = '"+ f.FieldValue+"'";
-                    res += s;
-                }
-            }
-            return res;
         }
         public void Close()
         {

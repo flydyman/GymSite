@@ -1,8 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@using System;
+@{
+    ViewData["Title"] = "Client registration";
+    bool isEmpty = Convert.ToBoolean(ViewData["EmptyResult"]);
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@model GymSite.Models.Client
+<div>
+@using (Html.BeginForm("SearchResult", "Home", FormMethod.Post)){
+    @Html.Label("LastName", "Search by Last Name")
+    <br />
+    @Html.TextBox("LastName")
+    <br />
+    <input class="btn btn-outline-dark" type="submit" value="Search" />
+}
+</div>
+@if (isEmpty){
+    <p><strong style="color: red;">No Results</strong></p>
+}
+<div>
+    <a asp-action="Registration" class="btn btn-outline-dark">Register new Client</a>
 </div>

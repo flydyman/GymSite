@@ -1,5 +1,5 @@
 @using System.Collections.Generic;
-@using GymMvc.Models;
+@using GymSite.Models;
 @{
     ViewData["Title"] = "Clients Search Results";
 }
@@ -7,7 +7,7 @@
 
 <h2>Results: @Model.Count.ToString() pts</h2>
 
-<table class="table">
+<table>
 @foreach (Client c in Model)
 {
 <tr>

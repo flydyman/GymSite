@@ -1,9 +1,9 @@
-@using GymMvc.Models;
+@using GymSite.Models;
 @using System;
 @{
     ViewData["Title"] = "New Client";
 }
-@model GymMvc.Models.Client
+@model GymSite.Models.Client
 <h2>Create new client record</h2>
 @using (Html.BeginForm("Registration", "Home", FormMethod.Post)){
     @Html.HiddenFor(m => m.ID);

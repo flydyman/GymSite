@@ -8,16 +8,16 @@ namespace GymSite.Models
     {
         public enum Genders {
             [Display(Name = "Male")]
-            M = 0,
+            M,
             [Display(Name = "Female")]
-            F = 1
+            F
         }
 
         [Key]
         public int ID {get;set;}
         public string LastName {get;set;}
         public string FirstName {get;set;}
-        [Column(TypeName="INT(1)")]
+        [Column(TypeName="CHAR(1)")]
         public Genders Gender {get;set;}
         [DataType(DataType.Date)]
         public DateTime DateOfBirth {get;set;}

@@ -15,22 +15,30 @@ namespace GymSite.Relations
         List<T> Items = new List<T>();
         public List<T> GetList {
             get{
+                FillItems();
                 return Items;
-            }
-        }
-        public T GetLast {
-            get{
-                return GetList.Last();
             }
         }
         string TableName;
         List<string> Fields = new List<string>();
+        public string GetFields {
+            get{
+                string s = "";
+                for (int i = 0; i< Fields.Count; i++)
+                {
+                    s += Fields[i];
+                    if (i != Fields.Count - 1 ) s += ", ";
+                }
+                return s;
+            }
+        }
         MyDBUse db;
         public string SelectString{ 
             get{
                 return $"SELECT * FROM {TableName}";
             }
         }
+
 
         public IEnumerator GetEnumerator()
         {
@@ -40,7 +48,7 @@ namespace GymSite.Relations
         /// <summary>
         /// Парсит DbDataReader в обьект
         /// </summary>
-        public T ParseRow(DataRow row)
+        public T ParseRow(DbDataReader row)
         {
             T res = new T();
             var pi = typeof(T).GetProperties();
@@ -48,107 +56,86 @@ namespace GymSite.Relations
             {
                 var p = pi.FirstOrDefault(x =>
                     x.Name == f);
-                //var row = reader.
                 p.SetValue(res, row[f], default);
             }
             return res;
         }
 
-        /// <summary>
-        /// Парсит обьект в object[]
-        /// </summary>
-        public object[] ParseObject(T obj)
+        public string ParseToDelete(string fieldName, string fieldValue)
+        {
+            return $"DELETE FROM {TableName} WHERE {fieldName} = {fieldValue};";
+        }
+        public string ParseToDelete(string expression)
+        {
+            return $"DELETE FROM {TableName} WHERE {expression};";
+        }
+
+        public string ParseToUpdate(T obj, string idName = "")
         {
             var pi = typeof(T).GetProperties();
-            object[] row = new object[pi.Length];
-            for (int i = 0; i< row.Length; i++)
+            string pairs = "";
+            int startAt = idName == "" ? 1 : 0;
+            for (int i = startAt; i< pi.Count(); i++)
             {
-                row[i] = pi[i].GetValue(obj, null);
+                if (startAt ==0 && pi[i].Name != idName)
+                {
+                    if (pi[i].Name!="DateTime")
+                        pairs += pi[i].Name + " = '" + pi[i].GetValue(obj, null).ToString() + "'";
+                    else
+                        pairs += pi[i].Name + " = '" + Convert.ToDateTime(pi[i].GetValue(obj, null)).Date.ToString("yyyyMMdd") + "'";
+                }
+                if (i != pi.Count() - 1) pairs += ", ";
             }
-            return row;
+            string where = idName == "" ? $"{pi[0].Name} = {pi[0].GetValue(obj).ToString()}" : $"{idName} = {pi[Fields.IndexOf(idName)].GetValue(obj).ToString()}";
+            return $"UPDATE {TableName} SET ({pairs}) WHERE ({where});";
         }
-        public int Add (T obj)
-        {   
-            return 0;
-        }
-        public int GetID(T obj)
+
+        public string ParseToInstert(T obj)
         {
-            return 0;
-        }
-        public T GetCurrent()
-        {
-            return Items.Last();
-        }
-        public T GetObject(int id)
-        {
-            return Items[id];
-        }
-        public int Remove (T obj)
-        {
-            return 0;
-        }
-        public int Update( T obj)
-        {
-            foreach (string f in Fields)
+            var pi = typeof(T).GetProperties();
+            string res = "";
+            for (int i = 0; i< pi.Count(); i++)
             {
-                var p = typeof(T).GetProperties().FirstOrDefault(x =>
-                    x.Name == f);
-                //tmp[f] = p.GetValue(obj, null);
-                
+                if (pi[i].Name!="DateTime")
+                    res += "'" + pi[i].GetValue(obj, null).ToString() + "'";
+                else
+                    res += "'" + Convert.ToDateTime(pi[i].GetValue(obj)).Date.ToString("yyyyMMdd") + "'";
+                if (i != pi.Count() - 1) res += ", ";
             }
-            
-            return 0;
+            return $"INSERT INTO {TableName} ({GetFields}) VALUES ({res}); SELECT LAST_INSERT_ID();";
         }
-        private void FillItems()
+        
+        public void FillItems()
         {
-            // 1. Fill fields
+            DbDataReader reader = db.GetReader(SelectString);
+            if (Items.Count>0) Items.Clear();
+            while (reader.Read())
+            {
+                Items.Add(ParseRow(reader));
+            }
+            reader.Close();
+            //db.Close();
+        }
+        
+        public int Update (string query)
+        {
+            FillItems();
+            int res =  db.GetCommand(query).ExecuteNonQuery(); 
+            //db.Close();
+            FillItems();
+            return res;
+        }
+
+        public MyDBSet(MyDBUse db)
+        {
+            this.db = db;
             PropertyInfo[] pi = typeof(T).GetProperties();
+            TableName = typeof(T).Name+"s";
             Fields.Clear();
             foreach (PropertyInfo p in pi)
             {
                 Fields.Add(p.Name);
             }
-            // 2. Fill items
-            try
-            {
-                DbDataReader reader = db.GetReader(SelectString);
-                DataTable table = reader.GetSchemaTable();
-                foreach (DataRow row in table.Rows)
-                {
-                    Items.Add(ParseRow(row));
-                }
-                reader.Close();
-            } finally {
-                db.Close();
-            }
-        }
-        private void FillDB()
-        {
-            try{
-                DbDataReader reader = db.GetReader(SelectString);
-
-                reader.Close();
-            } finally {
-                db.Close();
-            }
-        }
-        public MyDBSet(MyDBUse DataBase)
-        {
-            db = DataBase;
-            
-        }
-        private void Test()
-        {
-            Console.WriteLine($"Table Name: {TableName}");
-            if (Fields.Count>0)
-            {
-                foreach (string f in Fields)
-                {
-                    Console.Write($"\t {f}");
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine($"Rows: {Items.Count}");
         }
     }
 }
