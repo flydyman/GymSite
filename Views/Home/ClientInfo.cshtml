@@ -22,15 +22,16 @@
     </td>
 </tr>
 <tr>
-    <td>Training</td>
+    <td>Training<br />
+    <a class="btn btn-outline-dark" asp-action="TrainClient" asp-route-id="@Model.ID">Schedule training</a></td>
     <td>@Model.Description<br />
-    Training costs @Model.Cost.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))
+    Abonement costs @Model.Cost.ToString("c")
     </td>
 </tr>
 } else {
 <tr>
     <td>Client has no abonement!</td>
-    <td><a class="btn btn-outline-dark">Make new</a></td>
+    <td><a class="btn btn-outline-dark" asp-action="AddCard" asp-route-idClient="@Model.ID">Make new</a></td>
 </tr>
 }
 </table>

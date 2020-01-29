@@ -1,0 +1,45 @@
+@using System;
+@using GymSite.Models.Views;
+@{
+    ViewData["Title"] = "Calendar";
+    DateTime CurrDate = Convert.ToDateTime(ViewData["CurrDate"]);
+}
+@model List<TrainingView>
+
+<h2>Calendar: @CurrDate.ToString("yyyy - MM - dd")</h2>
+
+<table class="with-borders">
+<thead>
+<td class="with-borders">Time</td>
+<td class="with-borders">Training Info</td>
+<td class="with-borders">Clients</td>
+<td class="with-borders"></td>
+</thead>
+@foreach (TrainingView item in Model)
+{
+    <tr>
+    <td class="with-border">
+        @{
+           DateTime time = new DateTime(1,1,1,item.ID,0,0);
+           @time.ToString("HH:mm");
+        }
+    </td>
+    @if (item.ID_Training == 0)
+    {
+    <td colspan="3" class="with-borders"><a class="btn btn-outline" style="text-align: center;">No training scheduled</a></td>
+    } else {
+    <td class="with-borders">
+        <a class="btn btn-outline-dark">Trainer: @item.TrainerName</a><br />
+        Group: @item.GroupTypeName
+    </td>
+    <td class="with-borders">@item.ClientsCount.ToString()</td>
+    <td class="with-borders">
+        <a class="btn btn-outline-dark">View clients</a><br />
+        <a class="btn btn-outline-dark">Reschedule training</a><br />
+        <a class="btn btn-outline-dark">Delete training</a>
+    </td>
+    }
+    </tr>
+    
+}
+</table>

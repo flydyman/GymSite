@@ -11,7 +11,7 @@ namespace GymSite.Models.Views
         public int ID {get;set;}
         public string LastName {get;set;}
         public string FirstName {get;set;}
-        public Client.Genders Gender {get;set;}
+        public Genders Gender {get;set;}
         [DataType(DataType.Date)]
         public DateTime DateOfBirth {get;set;}
         // From Abonement
@@ -20,6 +20,7 @@ namespace GymSite.Models.Views
         [DataType(DataType.Date)]
         public DateTime EndDate {get;set;}
         // From Price
+        public int ID_Price {get;set;}
         public string Description {get;set;}
         public int Cost {get;set;}
         public bool HasAbonement {get;set;}

@@ -1,0 +1,24 @@
+@using System;
+@using GymSite.Models;
+@{
+    ViewData["Title"] = "Add Abonement Card";
+    var Prices = (ViewData["Prices"] as SelectList);
+}
+@model GymSite.Models.Views.CardView;
+
+<h2>@ViewData["Title"]</h2>
+
+@using(Html.BeginForm("AddCard", "Home", Model, FormMethod.Post)){
+    @Model.FullName;
+    <br />
+    @Html.Label("Trainings strats at");
+    @Model.StartDate.Date.ToString(); 
+    <br />
+    @Html.LabelFor(m => m.EndDate, "Trainings last day: ");
+    @Html.TextBoxFor(m => m.EndDate, Model.EndDate.Date.ToString(), new{type = "date"});
+    <br />
+    @Html.LabelFor(m => m.ID_Price, "Training group: ");
+    @Html.DropDownListFor(m => m.ID_Price, Prices);
+    <br />
+    <input type="submit" class="btn btn-outline-dark" value="Create abonement's card" />
+}

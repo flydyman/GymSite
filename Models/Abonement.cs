@@ -13,5 +13,6 @@ namespace GymSite.Models
         [DataType(DataType.Date)]
         public DateTime EndDate {get;set;}
         public int ID_Price {get;set;}
+        public int TotalPrice {get;set;}
     }
 }

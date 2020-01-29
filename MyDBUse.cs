@@ -43,29 +43,6 @@ namespace GymSite
             }
             return null;
         }
-        private DbCommandBuilder GetCommBuilder(DataAdapter adapter)
-        {
-            switch (dbtype)
-            {
-                case (MyDBType.mysql):
-                    return new MySqlCommandBuilder((MySqlDataAdapter)adapter);
-                case (MyDBType.sqlite):
-                    return new SQLiteCommandBuilder((SQLiteDataAdapter)adapter);
-            }
-            return null;
-        }
-        private DataAdapter GetDataAdapter(string query)
-        {
-            switch (dbtype)
-            {
-                case (MyDBType.mysql):
-                    return new MySqlDataAdapter(query, (MySqlConnection)Connection);
-                case (MyDBType.sqlite):
-                    return new SQLiteDataAdapter(query, (SQLiteConnection)Connection);
-            }
-            return null;
-        }
-
         public DbDataReader GetReader (string query)
         {
             // For direct access

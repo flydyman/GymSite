@@ -14,10 +14,10 @@
     @Html.TextBoxFor(n => n.FirstName);
     <br />
     @Html.LabelFor(n => n.Gender, "Gender : ");
-    @Html.DropDownListFor(n => n.Gender, Html.GetEnumSelectList(typeof(Client.Genders)));
+    @Html.DropDownListFor(n => n.Gender, Html.GetEnumSelectList(typeof(Genders)));
     <br />
     @Html.LabelFor(n => n.DateOfBirth, "Date of birth");
-    @Html.TextBoxFor(n => n.DateOfBirth, DateTime.Now.ToShortDateString(), new {type = "date"})
+    @Html.TextBoxFor(n => n.DateOfBirth, DateTime.Now.ToString(), new{type = "date"})
     <br />
     <input class="btn btn-outline-dark" type="submit" value="Create" />
 }

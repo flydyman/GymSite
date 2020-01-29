@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GymSite.Models
 {
+    public enum Genders {
+        [Display(Name = "Male")]
+        M,
+        [Display(Name = "Female")]
+        F
+    }
     public class Client
     {
-        public enum Genders {
-            [Display(Name = "Male")]
-            M,
-            [Display(Name = "Female")]
-            F
-        }
 
         [Key]
         public int ID {get;set;}

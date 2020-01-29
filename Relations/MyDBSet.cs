@@ -44,10 +44,6 @@ namespace GymSite.Relations
         {
             return Items.GetEnumerator();
         }
-
-        /// <summary>
-        /// Парсит DbDataReader в обьект
-        /// </summary>
         public T ParseRow(DbDataReader row)
         {
             T res = new T();
@@ -56,7 +52,19 @@ namespace GymSite.Relations
             {
                 var p = pi.FirstOrDefault(x =>
                     x.Name == f);
-                p.SetValue(res, row[f], default);
+                if (p.PropertyType.Name == "Genders")
+                {
+                    switch (row[f])
+                    {
+                        case ("M"):
+                            p.SetValue(res, Genders.M);
+                            break;
+                        case ("F"):
+                            p.SetValue(res, Genders.F);
+                            break;
+                    }
+                } else
+                p.SetValue(res, row[f]);
             }
             return res;
         }
@@ -79,10 +87,10 @@ namespace GymSite.Relations
             {
                 if (startAt ==0 && pi[i].Name != idName)
                 {
-                    if (pi[i].Name!="DateTime")
+                    if (pi[i].PropertyType.FullName!="System.DateTime")
                         pairs += pi[i].Name + " = '" + pi[i].GetValue(obj, null).ToString() + "'";
                     else
-                        pairs += pi[i].Name + " = '" + Convert.ToDateTime(pi[i].GetValue(obj, null)).Date.ToString("yyyyMMdd") + "'";
+                        pairs += pi[i].Name + " = '" + Convert.ToDateTime(pi[i].GetValue(obj)).Date.ToString("yyyy-MM-dd") + "'";
                 }
                 if (i != pi.Count() - 1) pairs += ", ";
             }
@@ -96,10 +104,10 @@ namespace GymSite.Relations
             string res = "";
             for (int i = 0; i< pi.Count(); i++)
             {
-                if (pi[i].Name!="DateTime")
+                if (pi[i].PropertyType.FullName!="System.DateTime")
                     res += "'" + pi[i].GetValue(obj, null).ToString() + "'";
                 else
-                    res += "'" + Convert.ToDateTime(pi[i].GetValue(obj)).Date.ToString("yyyyMMdd") + "'";
+                    res += "'" + Convert.ToDateTime(pi[i].GetValue(obj)).Date.ToString("yyyy-MM-dd") + "'";
                 if (i != pi.Count() - 1) res += ", ";
             }
             return $"INSERT INTO {TableName} ({GetFields}) VALUES ({res}); SELECT LAST_INSERT_ID();";
