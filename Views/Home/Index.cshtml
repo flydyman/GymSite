@@ -3,7 +3,7 @@
     ViewData["Title"] = "Client registration";
     bool isEmpty = Convert.ToBoolean(ViewData["EmptyResult"]);
 }
-@model GymSite.Models.Client
+@model GymSite.Models.Client;
 <div>
 @using (Html.BeginForm("SearchResult", "Home", FormMethod.Post)){
     @Html.Label("LastName", "Search by Last Name")

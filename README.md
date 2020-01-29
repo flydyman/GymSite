@@ -1,3 +1,3 @@
 # GymSite
 
-TODO: Home/TrainClient
+TODO: Home/TrainClient again

@@ -35,11 +35,9 @@ namespace GymSite.Relations
         MyDBUse db;
         public string SelectString{ 
             get{
-                return $"SELECT * FROM {TableName}";
+                return $"SELECT * FROM {TableName};";
             }
         }
-
-
         public IEnumerator GetEnumerator()
         {
             return Items.GetEnumerator();
@@ -62,9 +60,13 @@ namespace GymSite.Relations
                         case ("F"):
                             p.SetValue(res, Genders.F);
                             break;
+                        default:
+                            p.SetValue(res, Genders.M);
+                            break;
                     }
-                } else
-                p.SetValue(res, row[f]);
+                } else {
+                    p.SetValue(res, row[f]);
+                }
             }
             return res;
         }
@@ -91,11 +93,11 @@ namespace GymSite.Relations
                         pairs += pi[i].Name + " = '" + pi[i].GetValue(obj, null).ToString() + "'";
                     else
                         pairs += pi[i].Name + " = '" + Convert.ToDateTime(pi[i].GetValue(obj)).Date.ToString("yyyy-MM-dd") + "'";
+                    if (i != pi.Count() - 1) pairs += ", ";
                 }
-                if (i != pi.Count() - 1) pairs += ", ";
             }
             string where = idName == "" ? $"{pi[0].Name} = {pi[0].GetValue(obj).ToString()}" : $"{idName} = {pi[Fields.IndexOf(idName)].GetValue(obj).ToString()}";
-            return $"UPDATE {TableName} SET ({pairs}) WHERE ({where});";
+            return $"UPDATE {TableName} SET {pairs} WHERE {where};";
         }
 
         public string ParseToInstert(T obj)
@@ -110,7 +112,7 @@ namespace GymSite.Relations
                     res += "'" + Convert.ToDateTime(pi[i].GetValue(obj)).Date.ToString("yyyy-MM-dd") + "'";
                 if (i != pi.Count() - 1) res += ", ";
             }
-            return $"INSERT INTO {TableName} ({GetFields}) VALUES ({res}); SELECT LAST_INSERT_ID();";
+            return $"INSERT INTO {TableName} ({GetFields}) VALUES ({res});";
         }
         
         public void FillItems()
@@ -122,16 +124,18 @@ namespace GymSite.Relations
                 Items.Add(ParseRow(reader));
             }
             reader.Close();
-            //db.Close();
         }
         
         public int Update (string query)
         {
             FillItems();
-            int res =  db.GetCommand(query).ExecuteNonQuery(); 
-            //db.Close();
+            
+            long res =  db.GetCommand(query).ExecuteNonQuery();
+            if (res>0) {
+                res = (long)(ulong)db.GetCommand("SELECT LAST_INSERT_ID() AS id;").ExecuteScalar();
+            }
             FillItems();
-            return res;
+            return Convert.ToInt32(res);
         }
 
         public MyDBSet(MyDBUse db)

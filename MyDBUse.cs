@@ -32,6 +32,7 @@ namespace GymSite
             Connection.Open();
         }
 
+
         public DbCommand GetCommand(string query)
         {
             switch (dbtype)

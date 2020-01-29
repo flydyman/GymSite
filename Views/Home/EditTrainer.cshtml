@@ -1,0 +1,33 @@
+@using GymSite.Models;
+@{
+    ViewData["Title"] = "Edit trainer";
+}
+@model Trainer;
+
+<h2>@ViewData["Title"]</h2>
+<table>
+@using(Html.BeginForm("EditTrainer","Home", Model, FormMethod.Post)){
+    <tr>
+        <td>
+            @Html.HiddenFor(x => x.ID)
+            @Html.LabelFor(x => x.LastName, "Last name")
+        </td>
+        <td>
+            @Html.EditorFor(x => x.LastName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(x => x.FirstName, "First name")
+        </td>
+        <td>
+            @Html.EditorFor(x => x.FirstName)
+        </td>
+    </tr>
+    <tr>
+        <td colspan=2>
+        <input type="submit" class="btn btn-outline-dark" value="Save trainer" />
+        <td>
+    </tr>
+}
+</table>

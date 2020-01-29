@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "New Client";
 }
-@model GymSite.Models.Client
+@model GymSite.Models.Client;
 <h2>Create new client record</h2>
 @using (Html.BeginForm("Registration", "Home", FormMethod.Post)){
     @Html.HiddenFor(m => m.ID);

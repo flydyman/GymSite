@@ -1,0 +1,19 @@
+@using GymSite.Models;
+@{
+    ViewData["Title"] = "Trainers";
+}
+@model List<Trainer>
+
+<h2>Trainers: @Model.Count persons</h2>
+
+@if (Model.Count>0){
+@foreach (Trainer item in Model){
+<a class="btn btn-outline-dark" asp-action="EditTrainer" asp-route-id="@item.ID">
+    <strong> Trainer: @item.LastName, @item.FirstName</strong> <br />
+    Edit info
+</a>
+}
+}
+<div>
+<a class="btn btn-outline-dark" asp-action="AddTrainer">Add new trainer</a>
+</div>
