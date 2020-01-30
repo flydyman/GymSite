@@ -25,7 +25,10 @@ namespace GymSite.Controllers
         public HomeController(IConfiguration configuration)
         {
             Configuration = configuration;
-            string dbConn = Configuration.GetConnectionString("mysql_local");
+            /// Home
+            //string dbConn = Configuration.GetConnectionString("mysql_home");
+            /// Work
+            string dbConn = Configuration.GetConnectionString("mysql_8");
             Context = new MyDBContext(new MyDBUse(MyDBType.mysql, dbConn));
             EmptyResult = false;
         }
