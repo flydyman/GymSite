@@ -26,9 +26,9 @@ namespace GymSite.Controllers
         {
             Configuration = configuration;
             /// Home
-            //string dbConn = Configuration.GetConnectionString("mysql_home");
+            string dbConn = Configuration.GetConnectionString("mysql_home");
             /// Work
-            string dbConn = Configuration.GetConnectionString("mysql_8");
+            //string dbConn = Configuration.GetConnectionString("mysql_8");
             Context = new MyDBContext(new MyDBUse(MyDBType.mysql, dbConn));
             EmptyResult = false;
         }
@@ -86,7 +86,21 @@ namespace GymSite.Controllers
             };
             return View(ci);
         }
+        public IActionResult TrainFromClient(int? id, DateTime? when, int? idTraining)
+        {
+            if (id == null || when == null) return RedirectToAction("Error");
+            if (idTraining == null) idTraining = 0;
+            // 
+            Training t = new Training();
+            if (idTraining == 0) // add tew training
+            {
 
+            } else // add client to training program
+            {
+                t = Context.Trainings.GetList.First(x => x.ID == idTraining);
+            }
+            return View();
+        }
         public IActionResult TrainClient(int? id, DateTime? when)
         {
             if (id == null || id == 0) return RedirectToAction("Error");
@@ -230,7 +244,7 @@ namespace GymSite.Controllers
             if (!String.IsNullOrEmpty(LastName))
             {
                 List<Client> cs = Context.Clients.GetList.Where(x =>
-                    x.LastName.ToUpper() == LastName.ToUpper()).ToList();
+                    x.LastName.ToUpper().Contains(LastName.ToUpper())).ToList();
                 if (cs.Count > 0)
                     EmptyResult = false;
                     return View(cs);
