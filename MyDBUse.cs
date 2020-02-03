@@ -12,7 +12,7 @@ namespace GymSite
         mysql,
         sqlite
     }
-    public class MyDBUse
+    public class MyDBUse : IDisposable
     {
         DbConnection Connection;
         MyDBType dbtype;
@@ -53,6 +53,11 @@ namespace GymSite
         public void Close()
         {
             Connection.Close();
+        }
+
+        public void Dispose()
+        {
+            Close();
         }
     }
 }

@@ -1,15 +1,15 @@
 @using GymSite.Models;
 @{
-    ViewData["Title"] = "Edit trainer";
+    ViewData["Title"] = "Add new trainer";
 }
 @model Trainer;
 
 <h2>@ViewData["Title"]</h2>
+
 <table>
-@using(Html.BeginForm("EditTrainer","Home", Model, FormMethod.Post)){
+@using(Html.BeginForm("AddTrainer","Trainer", Model, FormMethod.Post)){
     <tr>
         <td>
-            @Html.HiddenFor(x => x.ID)
             @Html.LabelFor(x => x.LastName, "Last name")
         </td>
         <td>
@@ -26,7 +26,7 @@
     </tr>
     <tr>
         <td colspan=2>
-        <input type="submit" class="btn btn-outline-dark" value="Save trainer" />
+        <input type="submit" class="btn btn-outline-dark" value="Add trainer" />
         <td>
     </tr>
 }

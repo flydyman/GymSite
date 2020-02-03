@@ -8,7 +8,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-@using(Html.BeginForm("AddCard", "Home", Model, FormMethod.Post)){
+@using(Html.BeginForm("AddCard", "Client", Model, FormMethod.Post)){
     @Model.FullName;
     <br />
     @Html.Label("Trainings strats at");

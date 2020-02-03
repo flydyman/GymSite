@@ -12,13 +12,13 @@
 <div class="container">
 <ul class="navbar-nav flex-grow-1 flex-sm-row">
     <li class="nav-item">
-        <a class="btn btn-outline-dark" asp-action="Calendar" asp-route-when="@PrevDate">Previous</a>
+        <a class="btn btn-outline-dark" asp-action="Index" asp-route-when="@PrevDate">Previous</a>
     </li>
     <li class="nav-item">
-        <a class="btn btn-outline-dark" asp-action="Calendar" asp-route-when="@DateTime.Now">Today</a>
+        <a class="btn btn-outline-dark" asp-action="Index" asp-route-when="@DateTime.Now">Today</a>
     </li>
     <li class="nav-item">
-        <a class="btn btn-outline-dark" asp-action="Calendar" asp-route-when="@NextDate">Next</a>
+        <a class="btn btn-outline-dark" asp-action="Index" asp-route-when="@NextDate">Next</a>
     </li>
 </ul>
 </div>
@@ -40,7 +40,10 @@
     </td>
     @if (item.ID_Training == 0)
     {
-    <td colspan="3" class="with-borders"><a class="btn btn-outline" style="text-align: center;">No training scheduled</a></td>
+        DateTime date = new DateTime(CurrDate.Year, CurrDate.Month, CurrDate.Day,
+            item.ID, 0, 0);
+        
+    <td colspan="3" class="with-borders btn btn-outline"><a asp-controller="Training" asp-action="New" asp-route-date="@date" style="text-align: center;">No training scheduled</a></td>
     } else {
     <td class="with-borders">
         <a class="btn btn-outline-dark">Trainer: @item.TrainerName<br />

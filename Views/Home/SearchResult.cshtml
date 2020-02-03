@@ -12,8 +12,8 @@
 {
 <tr>
     <td>@c.LastName, @c.FirstName (@c.DateOfBirth.ToShortDateString())</td>
-    <td><a class="btn btn-outline-dark" asp-action="ClientInfo" asp-route-id="@c.ID">Info</a></td>
+    <td><a class="btn btn-outline-dark" asp-action="Index" asp-controller="Client" asp-route-id="@c.ID">Info</a></td>
 </tr>
 }
 </table>
-<a asp-action="Search" class="btn btn-outline-dark">Back to search</a>
+<a asp-action="Index" asp-controller="Home" class="btn btn-outline-dark">Back to search</a>

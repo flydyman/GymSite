@@ -5,7 +5,7 @@
 }
 @model GymSite.Models.Client;
 <h2>Create new client record</h2>
-@using (Html.BeginForm("Registration", "Home", FormMethod.Post)){
+@using (Html.BeginForm("New", "Client", FormMethod.Post)){
     @Html.HiddenFor(m => m.ID);
     @Html.LabelFor(n => n.LastName, "Last name : ");
     @Html.TextBoxFor(n => n.LastName);

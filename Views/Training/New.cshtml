@@ -1,0 +1,29 @@
+﻿@model GymSite.Models.Training
+
+@{
+    ViewData["Title"] = "Add new training";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@using (Html.BeginForm("New", "Training", Model, FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.ID)
+    <table>
+        <tr>
+            <td>Trainer</td>
+            <td>@Html.DropDownListFor(x => x.ID_Trainer, ViewBag.Trainers as SelectList)</td>
+        </tr>
+        <tr>
+            <td>Group</td>
+            <td>@Html.DropDownListFor(x=>x.ID_Price, ViewBag.Groups as SelectList)</td>
+        </tr>
+        <tr>
+            <td>Start at</td>
+            <td>@Html.EditorFor(x=>x.StartTime)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Add"/></td>
+        </tr>
+    </table>
+}

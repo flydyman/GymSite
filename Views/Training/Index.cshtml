@@ -1,0 +1,34 @@
+﻿@model GymSite.Models.Views.FullTrainingView
+
+@{
+   ViewData["Title"] = "Training info";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<table>
+   <thead>
+   <td>Training info</td>
+   <td>Clients</td>
+   </thead>
+   <tbody>
+   <tr>
+      <td>
+         Trainer : @Model.TrainerName <br />
+         Starts at : @Model.StartTime.ToString("U") <br />
+         Group : @Model.Group.Description
+      </td>
+      <td>
+         @foreach (Client item in Model.Clients)
+         {
+            <p>
+         @item.LastName; @item.FirstName;
+         </p>
+            @item.Gender; 
+            <br>
+         }
+      </td>
+   </tr>
+   </tbody>
+</table>
+<a class="btn btn-outline-dark">Edit training</a>

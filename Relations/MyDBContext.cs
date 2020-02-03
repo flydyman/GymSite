@@ -1,5 +1,6 @@
 using GymSite;
 using GymSite.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GymSite.Relations
 {

@@ -12,13 +12,13 @@
 <div class="container">
 <ul class="navbar-nav flex-grow-1 flex-sm-row">
     <li class="nav-item">
-        <a class="btn btn-outline-dark" asp-action="TrainClient" asp-route-id="@Model.client.ID" asp-route-when="@PrevDay">Previous</a>
+        <a class="btn btn-outline-dark" asp-action="Train" asp-route-id="@Model.client.ID" asp-route-when="@PrevDay">Previous</a>
     </li>
     <li class="nav-item">
-        <a class="btn btn-outline-dark" asp-action="TrainClient" asp-route-when="@DateTime.Now" asp-route-id="@Model.client.ID">Today</a>
+        <a class="btn btn-outline-dark" asp-action="Train" asp-route-when="@DateTime.Now" asp-route-id="@Model.client.ID">Today</a>
     </li>
     <li class="nav-item">
-        <a class="btn btn-outline-dark" asp-action="TrainClient" asp-route-when="@NextDay" asp-route-id="@Model.client.ID">Next</a>
+        <a class="btn btn-outline-dark" asp-action="Train" asp-route-when="@NextDay" asp-route-id="@Model.client.ID">Next</a>
     </li>
 </ul>
 </div>
