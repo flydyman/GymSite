@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GymSite.Relations;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,8 +25,14 @@ namespace GymSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMyDBService(MyDBType.mysql, Configuration.GetConnectionString("mysql_home"));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(o =>
+                {
+                    o.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    o.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/Account/Logout");
+                });
             services.AddControllersWithViews();
-            services.AddMyDBService(MyDBType.mysql, Configuration.GetConnectionString("mysql_8"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,7 @@ namespace GymSite
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

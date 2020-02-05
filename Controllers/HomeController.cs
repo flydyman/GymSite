@@ -11,9 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using GymSite.Models;
 using GymSite.Models.Views;
 using GymSite.Relations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GymSite.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         //private IConfiguration Configuration;
@@ -56,7 +58,7 @@ namespace GymSite.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

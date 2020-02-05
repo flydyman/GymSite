@@ -4,10 +4,12 @@ using System.Linq;
 using GymSite.Models;
 using GymSite.Models.Views;
 using GymSite.Relations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymSite.Controllers
 {
+    [Authorize]
     public class CalendarController : Controller
     {
         private MyDBContext Context;

@@ -1,0 +1,18 @@
+@model GymSite.Models.Views.LoginView
+
+@{
+    ViewData["Title"] = "Login";
+}
+<h3>@ViewData["Login"]</h3>
+
+@using (Html.BeginForm("Login", "Account", Model, FormMethod.Post))
+{
+    @Html.Label("Login")
+    @Html.EditorFor(x=>x.Login)
+    <br />
+    @Html.Label("Password")
+    @Html.PasswordFor(x=>x.Password)
+    <br />
+    <input type="submit" value="Login" /> 
+    <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Register">Registration</a>
+}

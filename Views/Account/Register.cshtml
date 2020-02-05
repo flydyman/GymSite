@@ -1,0 +1,26 @@
+@model GymSite.Models.Views.RegisterView
+
+@{
+    ViewData["Title"] = "Registration";
+}
+<h3>@ViewData["Title"]</h3>
+
+@using (Html.BeginForm("Register", "Account", Model, FormMethod.Post))
+{
+    @Html.Label("Last name")
+    @Html.EditorFor((x=>x.LastName))
+    <br />
+    @Html.Label("First name")
+    @Html.EditorFor(x=>x.FirstName)
+    <br />
+    @Html.Label("Login")
+    @Html.EditorFor(x=>x.Login)
+    <br />
+    @Html.Label(("Password"))
+    @Html.PasswordFor(x=>x.Password)
+    <br />
+    @Html.Label("Confirm password")
+    @Html.PasswordFor(x=>x.CPassword)
+    <br />
+    <input type="submit" value="Create" />
+}

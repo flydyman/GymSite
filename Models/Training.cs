@@ -13,7 +13,7 @@ namespace GymSite.Models
         public int ID_Creator {get;set;}
         [DataType(DataType.DateTime)]
         public DateTime StartTime {get;set;}
-        [DataType(DataType.DateTime)]
-        public DateTime EndTime {get;set;}
+        //[DataType(DataType.DateTime)]
+        //public DateTime EndTime {get;set;}
     }
 }

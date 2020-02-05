@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +26,28 @@
                         <li class="nav-item">
                             <a class="btn btn-outline-dark" asp-controller="Trainer" asp-action="Index">Trainers</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.Identity.Name.ToLower() == "admin")
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-dark" asp-controller="Staff" asp-action="Index">Staff</a>
+                                </li>
+                            }
+                            <li>Logined as @User.Identity.Name</li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

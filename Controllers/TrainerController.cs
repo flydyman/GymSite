@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using GymSite.Models;
 using GymSite.Relations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymSite.Controllers
 {
+    [Authorize]
     public class TrainerController : Controller
     {
         private MyDBContext Context;

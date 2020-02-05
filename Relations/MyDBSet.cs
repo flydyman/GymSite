@@ -70,6 +70,9 @@ namespace GymSite.Relations
                     case ("DateTime"):
                         p.SetValue(res,Convert.ToDateTime(row[f]));
                         break;
+                    case ("SByte"):
+                        p.SetValue(res, Convert.ToSByte(row[f]));
+                        break;
                     default:
                         p.SetValue(res, row[f]);
                         break;

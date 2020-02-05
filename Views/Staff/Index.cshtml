@@ -1,0 +1,14 @@
+@model List<GymSite.Models.Staff>
+
+@{
+    ViewData["Title"] = "Staff";
+}
+
+@foreach (Staff item in Model)
+{
+    <a class="btn btn-outline-dark">
+        ID: @item.ID.ToString()<br />
+        Name: @item.LastName, @item.FirstName <br />
+        Role: @Html.Label(item.IsAdmin==1 ? "Admininstrator" : "User") 
+    </a>
+}

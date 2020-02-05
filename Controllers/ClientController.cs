@@ -4,11 +4,13 @@ using System.Linq;
 using GymSite.Relations;
 using GymSite.Models;
 using GymSite.Models.Views;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GymSite.Controllers
 {
+    [Authorize]
     public class ClientController : Controller
     {
         private MyDBContext db;

@@ -4,11 +4,13 @@ using System.Linq;
 using GymSite.Models;
 using GymSite.Models.Views;
 using GymSite.Relations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GymSite.Controllers
 {
+    [Authorize]
     public class TrainingController : Controller
     {
         private MyDBContext Context;
@@ -52,12 +54,14 @@ namespace GymSite.Controllers
                     currDate.Month, currDate.Day,
                     currDate.Hour, 0, 0);
             }
+            Staff creator =
+                Context.Staffs.GetList.FirstOrDefault(x => x.Login.ToLower() == User.Identity.Name.ToLower());
 
             TrainingForClient model = new TrainingForClient()
             {
                 ID = 0,
-                EndTime = date.Value.AddHours(1),
-                ID_Creator = 1,
+                //EndTime = date.Value.AddHours(1),
+                ID_Creator = creator.ID,
                 ID_Price = 0,
                 ID_Trainer = 0,
                 ID_Client = idClient == null ? 0 : Convert.ToInt32(idClient),
@@ -75,7 +79,10 @@ namespace GymSite.Controllers
         public IActionResult New(TrainingForClient model)
         {
             model.ID = 0;
-            model.ID_Creator = 1;
+            Staff creator =
+                Context.Staffs.GetList.FirstOrDefault(x => x.Login.ToLower() == User.Identity.Name.ToLower());
+            model.ID_Creator = creator.ID;
+            //Console.WriteLine(model.StartTime.ToString());
             int res = Context.Trainings.Update(Context.Trainings.ParseToInstert(model));
             if (res > 0)
             {
