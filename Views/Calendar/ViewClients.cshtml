@@ -1,0 +1,15 @@
+﻿@model List<Client>
+
+@{
+    ViewData["Title"] = "Training info";
+    int idTraining = Convert.ToInt32(ViewBag.idTraining);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@foreach (Client item in Model)
+{
+    <a class="btn btn-outline-dark" asp-controller="Training" asp-action="RemoveFromTraining" asp-route-idClient="@item.ID" asp-route-idTraining="@idTraining">
+        <strong>@item.LastName, @item.FirstName</strong> <br/> (remove from training)
+    </a>
+}

@@ -107,7 +107,7 @@ namespace GymSite.Controllers
             Abonement a = db.Abonements.GetList.LastOrDefault(x => x.ID_Client == model.client.ID);
             model.Trainings = new List<TrainingView>();
             List<Training> t = db.Trainings.GetList.Where(x =>
-                x.StartTime.Date == when).ToList();
+                x.StartTime.Date == when.Value.Date).ToList();
             List<Trainer> tr = db.Trainers.GetList;
             List<Price> gr = db.Prices.GetList;
             // Magic actions
@@ -122,6 +122,7 @@ namespace GymSite.Controllers
                     TrainerName = "",
                     GroupTypeName = "",
                     ClientsCount = 0,
+                    MaxClients = 0,
                     IsRight = true
                 };
                 Training tm = t.FirstOrDefault(x => x.StartTime.Hour == i);
@@ -133,8 +134,10 @@ namespace GymSite.Controllers
                         Price group = gr.FirstOrDefault(x =>
                            x.ID == tm.ID_Price);
                         res.ID_Trainer = trainer.ID;
+                        res.ID_Training = tm.ID;
                         res.TrainerName = trainer.LastName + ", " + trainer.FirstName;
                         res.GroupTypeName = group.Description;
+                        res.MaxClients = group.MaxClients;
                         res.ClientsCount = db.TrainGroups.GetList.Where(x =>
                             x.ID_Training == tm.ID).Count();
                         res.IsRight = a.ID_Price==tm.ID_Price ? true : false;
@@ -161,6 +164,19 @@ namespace GymSite.Controllers
                     return RedirectToAction("Index", "Client", new { id });
             }
             return View(model);
+        }
+
+        public IActionResult AddClientToTraining(int idClient, int idTraining)
+        {
+            /// TODO: check for Max Trains ///
+            TrainGroup res = new TrainGroup()
+            {
+                ID_Client = idClient,
+                ID_Training = idTraining
+            };
+            ViewBag.idTraining = idTraining;
+            db.TrainGroups.Update(db.TrainGroups.ParseToInstert(res));
+            return RedirectToAction("Index", "Calendar");
         }
     }
 }

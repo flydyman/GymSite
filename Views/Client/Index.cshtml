@@ -11,14 +11,14 @@
     <td>Client</td>
     <td>@Model.LastName, @Model.FirstName<br />
     @Model.Gender<br />
-    @Model.DateOfBirth.ToShortDateString()
+    @Model.DateOfBirth.ToString("dd/MM/yyyy")
     </td>
 </tr>
 @if (Model.HasAbonement){
 <tr>
     <td>Abonement</td>
-    <td>Ordered at: @Model.StartDate.ToShortDateString()<br/>
-    Last day: @Model.EndDate.ToShortDateString()
+    <td>Ordered at: @Model.StartDate.ToString("dd/MM/yyyy")<br/>
+    Last day: @Model.EndDate.ToString("dd/MM/yyyy")
     </td>
 </tr>
 <tr>

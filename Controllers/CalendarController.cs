@@ -22,11 +22,17 @@ namespace GymSite.Controllers
         // GET
         public IActionResult Index(DateTime? when)
         {
-            if (when == null) when = DateTime.Now.Date;
-            ViewData["CurrDate"] = Convert.ToDateTime(when).ToString("yyyy-MM-dd");
+            if (when == null)
+            {
+                when = DateTime.Now;
+            }
+            
+            ViewData["CurrDate"] = when;
             List<TrainingView> model = new List<TrainingView>();
             List<Training> t = Context.Trainings.GetList.Where(x =>
-                x.StartTime.Date == when).ToList();
+                x.StartTime.Day == when.Value.Day && 
+                x.StartTime.Month == when.Value.Month &&
+                x.StartTime.Year == when.Value.Year).ToList();
             List<Trainer> tr = Context.Trainers.GetList;
             List<Price> gr = Context.Prices.GetList;
             // Magic actions
@@ -41,6 +47,7 @@ namespace GymSite.Controllers
                     TrainerName = "",
                     GroupTypeName = "",
                     ClientsCount = 0,
+                    MaxClients = 0,
                     IsRight = true
                 };
                 Training tm = t.FirstOrDefault(x => x.StartTime.Hour == i);
@@ -52,13 +59,30 @@ namespace GymSite.Controllers
                     Price group = gr.FirstOrDefault(x =>
                         x.ID == tm.ID_Price);
                     res.ID_Trainer = trainer.ID;
+                    res.ID_Training = tm.ID;
                     res.TrainerName = trainer.LastName + ", " + trainer.FirstName;
                     res.GroupTypeName = group.Description;
+                    res.MaxClients = group.MaxClients;
                     res.ClientsCount = Context.TrainGroups.GetList.Where(x =>
                         x.ID_Training == tm.ID).ToList().Count();
                 }
                 model.Add(res);
             }
+            return View(model);
+        }
+
+        public IActionResult ViewClients(int id)
+        {
+            List<TrainGroup> tg = Context.TrainGroups.GetList.Where(x => x.ID_Training == id).ToList();
+            List<Client> model = new List<Client>();
+            ViewBag.idTraining = id;
+            foreach (var t in tg)
+            {
+                model.AddRange((from c in Context.Clients.GetList
+                    where c.ID == t.ID_Client
+                    select c).ToList());
+            }
+                
             return View(model);
         }
     }

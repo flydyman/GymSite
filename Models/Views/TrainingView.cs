@@ -10,6 +10,7 @@ namespace GymSite.Models.Views
         public string TrainerName {get;set;}
         public string GroupTypeName {get;set;}
         public int ClientsCount {get;set;}
+        public int MaxClients { get; set; }
         // For assigning clients
         public bool IsRight {get;set;}
     }

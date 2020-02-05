@@ -10,5 +10,6 @@ namespace GymSite.Models
         [Column(TypeName="VARCHAR(100)")]
         public string Description {get;set;}
         public int Cost {get;set;}
+        public int MaxClients { get; set; }
     }
 }

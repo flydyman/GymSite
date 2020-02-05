@@ -1,4 +1,4 @@
-﻿@model GymSite.Models.Training
+﻿@model GymSite.Models.Views.TrainingForClient
 
 @{
     ViewData["Title"] = "Add new training";
@@ -9,6 +9,7 @@
 @using (Html.BeginForm("New", "Training", Model, FormMethod.Post))
 {
     @Html.HiddenFor(x => x.ID)
+    Model.ID_Client = Convert.ToInt32(ViewBag.idClient);
     <table>
         <tr>
             <td>Trainer</td>
