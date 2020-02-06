@@ -67,7 +67,18 @@ namespace GymSite.Controllers
                 ID_Client = idClient == null ? 0 : Convert.ToInt32(idClient),
                 StartTime = date.Value
             };
-            SelectList groups = new SelectList(Context.Prices.GetList, "ID", "Description");
+            SelectList groups;
+            if (idClient == null)
+            {
+                groups = new SelectList(Context.Prices.GetList, "ID", "Description");
+            }
+            else
+            {
+                int idGroup = Context.Abonements.GetList.FirstOrDefault(x => x.ID_Client == (int) idClient).ID_Price;
+                List<Price> pr = new List<Price>();
+                pr.Add(Context.Prices.GetList.FirstOrDefault(x => x.ID == idGroup));
+                groups = new SelectList(pr,"ID","Description");
+            }
             ViewBag.Groups = groups;
             SelectList trainers = new SelectList(Context.Trainers.GetList, "ID", "LastName");
             ViewBag.Trainers = trainers;

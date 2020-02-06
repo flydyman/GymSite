@@ -48,7 +48,7 @@ namespace GymSite.Controllers
             if (!String.IsNullOrEmpty(LastName))
             {
                 List<Client> cs = Context.Clients.GetList.Where(x =>
-                    x.LastName.ToUpper() == LastName.ToUpper()).ToList();
+                    x.LastName.ToUpper().Contains(LastName.ToUpper())).ToList();
                 if (cs.Count > 0)
                     EmptyResult = false;
                     return View(cs);
