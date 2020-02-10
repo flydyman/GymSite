@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\ilya.tsitok\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\ilya.tsitok\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="E:\src\GymSite" t="IncludeRecursive">
+      <e p=".gitignore" t="Include" />
+      <e p="appsettings.Development.json" t="Include" />
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Commons.cs" t="Include" />
+      <e p="Controllers" t="Include">
+        <e p="AccountController.cs" t="Include" />
+        <e p="CalendarController.cs" t="Include" />
+        <e p="ClientController.cs" t="Include" />
+        <e p="HomeController.cs" t="Include" />
+        <e p="StaffController.cs" t="Include" />
+        <e p="TrainerController.cs" t="Include" />
+        <e p="TrainingController.cs" t="Include" />
+      </e>
+      <e p="dump-latest.sql" t="Include" />
+      <e p="GymSite.csproj" t="IncludeRecursive" />
+      <e p="Hashing.cs" t="Include" />
+      <e p="Models" t="Include">
+        <e p="Abonement.cs" t="Include" />
+        <e p="Client.cs" t="Include" />
+        <e p="ErrorViewModel.cs" t="Include" />
+        <e p="Price.cs" t="Include" />
+        <e p="Staff.cs" t="Include" />
+        <e p="Trainer.cs" t="Include" />
+        <e p="TrainGroup.cs" t="Include" />
+        <e p="Training.cs" t="Include" />
+        <e p="Views" t="Include">
+          <e p="CardView.cs" t="Include" />
+          <e p="ClientInfo.cs" t="Include" />
+          <e p="FullTrainingView.cs" t="Include" />
+          <e p="LoginView.cs" t="Include" />
+          <e p="NewTrainingView.cs" t="Include" />
+          <e p="RegisterView.cs" t="Include" />
+          <e p="TrainingForClient.cs" t="Include" />
+          <e p="TrainingView.cs" t="Include" />
+        </e>
+      </e>
+      <e p="MyDBUse.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="GymSite.AssemblyInfo.cs" t="Include" />
+            <e p="GymSite.RazorAssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="README.md" t="Include" />
+      <e p="Relations" t="Include">
+        <e p="MyDBContext.cs" t="Include" />
+        <e p="MyDBService.cs" t="Include" />
+        <e p="MyDBSet.cs" t="Include" />
+      </e>
+      <e p="Startup.cs" t="Include" />
+      <e p="Views" t="Include">
+        <e p="_ViewImports.cshtml" t="Include" />
+        <e p="_ViewStart.cshtml" t="Include" />
+        <e p="Account" t="Include">
+          <e p="Login.cshtml" t="Include" />
+          <e p="Register.cshtml" t="Include" />
+        </e>
+        <e p="Calendar" t="Include">
+          <e p="Index.cshtml" t="Include" />
+          <e p="ViewClients.cshtml" t="Include" />
+        </e>
+        <e p="Client" t="Include">
+          <e p="AddCard.cshtml" t="Include" />
+          <e p="Index.cshtml" t="Include" />
+          <e p="New.cshtml" t="Include" />
+          <e p="Train.cshtml" t="Include" />
+        </e>
+        <e p="Home" t="Include">
+          <e p="Index.cshtml" t="Include" />
+          <e p="SearchResult.cshtml" t="Include" />
+        </e>
+        <e p="Shared" t="Include">
+          <e p="_Layout.cshtml" t="Include" />
+          <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+          <e p="Error.cshtml" t="Include" />
+        </e>
+        <e p="Staff" t="Include">
+          <e p="Index.cshtml" t="Include" />
+        </e>
+        <e p="Trainer" t="Include">
+          <e p="AddTrainer.cshtml" t="Include" />
+          <e p="EditTrainer.cshtml" t="Include" />
+          <e p="Index.cshtml" t="Include" />
+        </e>
+        <e p="Training" t="Include">
+          <e p="Index.cshtml" t="Include" />
+          <e p="New.cshtml" t="Include" />
+        </e>
+      </e>
+      <e p="wwwroot" t="Include">
+        <e p="css" t="Include">
+          <e p="site.css" t="Include" />
+        </e>
+        <e p="favicon.ico" t="Include" />
+        <e p="images" t="Include">
+          <e p="bg-green.png" t="Include" />
+          <e p="bg-metal.png" t="Include" />
+        </e>
+        <e p="js" t="Include">
+          <e p="site.js" t="Include" />
+        </e>
+        <e p="lib" t="Include">
+          <e p="bootstrap" t="Include">
+            <e p="dist" t="Include">
+              <e p="css" t="Include">
+                <e p="bootstrap-grid.css" t="Include" />
+                <e p="bootstrap-grid.css.map" t="Include" />
+                <e p="bootstrap-grid.min.css" t="Include" />
+                <e p="bootstrap-grid.min.css.map" t="Include" />
+                <e p="bootstrap-reboot.css" t="Include" />
+                <e p="bootstrap-reboot.css.map" t="Include" />
+                <e p="bootstrap-reboot.min.css" t="Include" />
+                <e p="bootstrap-reboot.min.css.map" t="Include" />
+                <e p="bootstrap.css" t="Include" />
+                <e p="bootstrap.css.map" t="Include" />
+                <e p="bootstrap.min.css" t="Include" />
+                <e p="bootstrap.min.css.map" t="Include" />
+              </e>
+              <e p="js" t="Include">
+                <e p="bootstrap.bundle.js" t="Include" />
+                <e p="bootstrap.bundle.js.map" t="Include" />
+                <e p="bootstrap.bundle.min.js" t="Include" />
+                <e p="bootstrap.bundle.min.js.map" t="Include" />
+                <e p="bootstrap.js" t="Include" />
+                <e p="bootstrap.js.map" t="Include" />
+                <e p="bootstrap.min.js" t="Include" />
+                <e p="bootstrap.min.js.map" t="Include" />
+              </e>
+            </e>
+            <e p="LICENSE" t="Include" />
+          </e>
+          <e p="jquery" t="Include">
+            <e p="dist" t="Include">
+              <e p="jquery.js" t="Include" />
+              <e p="jquery.min.js" t="Include" />
+              <e p="jquery.min.map" t="Include" />
+            </e>
+            <e p="LICENSE.txt" t="Include" />
+          </e>
+          <e p="jquery-validation" t="Include">
+            <e p="dist" t="Include">
+              <e p="additional-methods.js" t="Include" />
+              <e p="additional-methods.min.js" t="Include" />
+              <e p="jquery.validate.js" t="Include" />
+              <e p="jquery.validate.min.js" t="Include" />
+            </e>
+            <e p="LICENSE.md" t="Include" />
+          </e>
+          <e p="jquery-validation-unobtrusive" t="Include">
+            <e p="jquery.validate.unobtrusive.js" t="Include" />
+            <e p="jquery.validate.unobtrusive.min.js" t="Include" />
+            <e p="LICENSE.txt" t="Include" />
+          </e>
+        </e>
+      </e>
+    </e>
+  </component>
+</project>
