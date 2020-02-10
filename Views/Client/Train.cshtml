@@ -7,6 +7,7 @@
     DateTime PrevDay = Model.CurrDate.AddDays(-1);
     DateTime NextDay = Model.CurrDate.AddDays(1);
     bool HasPrev = (DateTime.Compare(PrevDay.ToUniversalTime(), DateTime.Today.ToUniversalTime()) >= 0) ? true : false;
+    bool HasNext = (DateTime.Compare(Model.CurrDate.ToUniversalTime(), Model.AbonementLastDay.ToUniversalTime())) <= 0 ? true : false;
 }
 
 <h2>@ViewData["Title"] at @Model.CurrDate.ToString("dd/MM/yyyy")</h2>
@@ -22,9 +23,12 @@
         <li class="nav-item">
             <a class="btn btn-outline-dark" asp-action="Train" asp-route-when="@DateTime.Now" asp-route-id="@Model.client.ID">Today</a>
         </li>
-        <li class="nav-item">
-            <a class="btn btn-outline-dark" asp-action="Train" asp-route-when="@NextDay" asp-route-id="@Model.client.ID">Next</a>
-        </li>
+        @if (HasNext)
+        {
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" asp-action="Train" asp-route-when="@NextDay" asp-route-id="@Model.client.ID">Next</a>
+            </li>
+        }
     </ul>
 </div>
 <table>

@@ -30,7 +30,16 @@ namespace GymSite.Controllers
             if (c == null || c.ID == 0) throw new Exception($"Client[{id}] is not found!");
             Abonement a = db.Abonements.GetList.FirstOrDefault(x =>
                 x.ID_Client == c.ID);
-            bool hasA = (a != null && a.ID != 0);
+            bool hasA;
+            if (DateTime.Compare(a.EndDate.ToUniversalTime(), DateTime.Today.ToUniversalTime()) < 0)
+            {
+                db.Abonements.Update(db.Abonements.ParseToDelete("ID",$"{a.ID}"));
+                hasA = false;
+            }
+            else
+            {
+                hasA = (a != null && a.ID != 0);
+            }
             Price p;
             if (hasA)
             {
@@ -107,6 +116,7 @@ namespace GymSite.Controllers
             model.client = db.Clients.GetList.FirstOrDefault(x => x.ID == id);
             if (model.client == null) return RedirectToAction("Error", "Home");
             Abonement a = db.Abonements.GetList.LastOrDefault(x => x.ID_Client == model.client.ID);
+            model.AbonementLastDay = a.EndDate;
             model.Trainings = new List<TrainingView>();
             List<Training> t = db.Trainings.GetList.Where(x =>
                 x.StartTime.Date == when.Value.Date).ToList();

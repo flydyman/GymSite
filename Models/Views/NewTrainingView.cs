@@ -10,6 +10,7 @@ namespace GymSite.Models.Views
         public List<TrainingView> Trainings {get;set;}
         public DateTime CurrDate {get;set;}
         public Client client {get;set;}
+        public DateTime AbonementLastDay { get; set; }
 
         public IEnumerator GetEnumerator()
         {
