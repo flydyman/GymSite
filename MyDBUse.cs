@@ -35,6 +35,7 @@ namespace GymSite
 
         public DbCommand GetCommand(string query)
         {
+            /*
             switch (dbtype)
             {
                 case (MyDBType.mysql):
@@ -42,7 +43,10 @@ namespace GymSite
                 case (MyDBType.sqlite):
                     return new SQLiteCommand(query, (SQLiteConnection)Connection);
             }
-            return null;
+            */
+            DbCommand comm = Connection.CreateCommand();
+            comm.CommandText = query;
+            return comm;
         }
         public DbDataReader GetReader (string query)
         {
