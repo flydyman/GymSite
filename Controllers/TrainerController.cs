@@ -56,7 +56,7 @@ namespace GymSite.Controllers
         {
             if (model.ID == 0) return RedirectToAction("Error", "Home");
             int res = Context.Trainers.Update(Context.Trainers.ParseToUpdate(model,"ID"));
-            if (res>0) return RedirectToAction("Index");
+            if (res>=0) return RedirectToAction("Index");
             return View(model);
         }
     }

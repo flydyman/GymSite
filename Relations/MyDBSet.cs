@@ -33,7 +33,7 @@ namespace GymSite.Relations
             }
         }
         MyDBUse db;
-        public string SelectString{ 
+        public virtual string SelectString{ 
             get{
                 return $"SELECT * FROM {TableName};";
             }
