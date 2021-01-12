@@ -1,5 +1,9 @@
 # GymSite
 
+Requirements:
+ - dotnetcore3.1
+ - mysql (barebone db skeleton is in `dump-latest.sql`)
+
 TODO: 
  - ~~Change DB table name `TrainingGroups` to `TrainGroups`.~~ - *Done.*
  - ~~Assign clients to trainings.~~ - *Done.*

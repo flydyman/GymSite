@@ -25,7 +25,7 @@ namespace GymSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMyDBService(MyDBType.mysql, Configuration.GetConnectionString("mysql_8"));
+            services.AddMyDBService(MyDBType.mysql, Configuration.GetConnectionString("mysql_home"));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(o =>
                 {
